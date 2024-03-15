@@ -6,7 +6,7 @@
 /*   By: fcasaubo <fcasaubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 12:34:15 by fcasaubo          #+#    #+#             */
-/*   Updated: 2024/03/12 15:33:07 by fcasaubo         ###   ########.fr       */
+/*   Updated: 2024/03/15 13:02:01 by fcasaubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,18 @@ void    add_to_philo_list(t_philosopher **list, int number)
 {
     t_philosopher	*new_philo;
 	t_philosopher	*current;
+	int				i;
 
 	new_philo = malloc(sizeof(t_philosopher));
 	new_philo->id = number;
-	new_philo->next = NULL;
+	new_philo->next = *list;
 	if (!*list)
 		*list = new_philo;
 	else
 	{
+		i = -1;
 		current = *list;
-		while (current->next)
+		while (++i < number - 2)
 			current = current->next;
 		current->next = new_philo;
 	}

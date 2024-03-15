@@ -6,7 +6,7 @@
 /*   By: fcasaubo <fcasaubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 14:23:11 by fcasaubo          #+#    #+#             */
-/*   Updated: 2024/03/12 15:52:02 by fcasaubo         ###   ########.fr       */
+/*   Updated: 2024/03/15 12:18:39 by fcasaubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,13 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <limits.h>
 #include <sys/time.h>
+
+#define HUNGRY      0
+#define EATING      1
+#define THINKING    2
+#define SLEEPING    3
 
 t_philosopher	*init_philosophers(int philo_number);
 
