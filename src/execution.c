@@ -6,7 +6,7 @@
 /*   By: fcasaubo <fcasaubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:35:20 by fcasaubo          #+#    #+#             */
-/*   Updated: 2024/03/15 16:33:19 by fcasaubo         ###   ########.fr       */
+/*   Updated: 2024/03/20 11:43:06 by fcasaubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	*think(void	*arguments)
 
 	args = arguments;
 	printf("I'm thinkin' bro\n");
-	gettimeofday(&t_eval_start, NULL);
+	gettimeofday(&t_eval_start, NULL); // START OF THE FUNCTION
 	usleep(args->time_to_sleep * 1000);
 	gettimeofday(&t_eval_end, NULL);
 	time_start = t_eval_start.tv_sec * 1000 + t_eval_start.tv_usec / 1000;
