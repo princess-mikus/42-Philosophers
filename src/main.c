@@ -6,7 +6,7 @@
 /*   By: fcasaubo <fcasaubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 12:10:09 by fcasaubo          #+#    #+#             */
-/*   Updated: 2024/03/15 11:33:03 by fcasaubo         ###   ########.fr       */
+/*   Updated: 2024/04/02 15:16:50 by fcasaubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	print_table(t_philosopher *philo_list)
 	printf("\n");
 }
 
-
 t_arguments	*parse_input(int argc, char	**argv)
 {
 	int			i;
@@ -33,7 +32,7 @@ t_arguments	*parse_input(int argc, char	**argv)
 	t_arguments	*arguments;
 
 	i = 0;
-	arguments = malloc(sizeof(arguments));
+	arguments = malloc(sizeof(t_arguments));
 	while (argv[++i])
 	{
 		k = -1;
@@ -42,13 +41,15 @@ t_arguments	*parse_input(int argc, char	**argv)
 				return (free(arguments), NULL);
 	}
 	arguments->philo_number = ft_atoui(argv[1]);
-	arguments->time_to_die = ft_atoui(argv[2]);
-	arguments->time_to_eat = ft_atoui(argv[3]);
-	arguments->time_to_sleep = ft_atoui(argv[4]);
+	arguments->time_to_die = ft_atoui(argv[2]) * 1000;
+	arguments->time_to_eat = ft_atoui(argv[3]) * 1000;
+	arguments->time_to_sleep = ft_atoui(argv[4]) * 1000;
+	arguments->max_eats = 0;
+	arguments->stop = false;
+	arguments->philos_eaten = 0;
+	pthread_mutex_init(&arguments->print, NULL);
 	if (argc == 6)
 		arguments->max_eats = ft_atoui(argv[5]);
-	else
-		arguments->max_eats = 0;
 	return (arguments);
 }
 
@@ -62,7 +63,10 @@ int	main(int argc, char **argv)
 	arguments = parse_input(argc, argv);
 	if (arguments == NULL)
 		return (0);
-    philo_list = init_philosophers(arguments->philo_number);
-	execute_simulation(arguments, philo_list);
+	philo_list = init_philosophers(arguments->philo_number, &arguments);
+	if (arguments->philo_number == 1)
+		one_sim(&philo_list);
+	else
+		execute_simulation(&philo_list);
 	free_things(arguments, philo_list);
 }
