@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_event.c                                      :+:      :+:    :+:   */
+/*   print_event_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mikus <mikus@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 12:38:24 by fcasaubo          #+#    #+#             */
-/*   Updated: 2024/04/13 14:05:15 by mikus            ###   ########.fr       */
+/*   Updated: 2024/04/13 14:45:10 by mikus            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
+#include "philosophers_bonus.h"
 
 time_t	print_event(char *event, \
 t_philosopher *philo, struct timeval event_time)

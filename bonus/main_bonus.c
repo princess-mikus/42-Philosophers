@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mikus <mikus@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 12:10:09 by fcasaubo          #+#    #+#             */
-/*   Updated: 2024/04/13 13:59:53 by mikus            ###   ########.fr       */
+/*   Updated: 2024/04/13 15:47:15 by mikus            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
+#include "philosophers_bonus.h"
 
 void	print_table(t_philosopher *philo_list)
 {
@@ -47,7 +47,8 @@ t_arguments	*parse_input(int argc, char	**argv)
 	arguments->max_eats = 0;
 	arguments->stop = false;
 	arguments->philos_eaten = 0;
-	pthread_mutex_init(&arguments->sim_status, NULL);
+	sem_init(arguments->sim_status, 1, 0);
+	sem_init(arguments->forks, 1, arguments->philo_number);
 	if (argc == 6)
 		arguments->max_eats = ft_atoui(argv[5]);
 	return (arguments);

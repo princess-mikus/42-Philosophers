@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_list.c                                       :+:      :+:    :+:   */
+/*   philo_list_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mikus <mikus@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 13:40:51 by fcasaubo          #+#    #+#             */
-/*   Updated: 2024/04/13 14:02:11 by mikus            ###   ########.fr       */
+/*   Updated: 2024/04/13 14:45:10 by mikus            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
+#include "philosophers_bonus.h"
 
 void	add_to_philo_list(t_philosopher **list, int number, t_arguments **args)
 {

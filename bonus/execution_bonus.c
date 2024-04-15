@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execution.c                                        :+:      :+:    :+:   */
+/*   execution_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mikus <mikus@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:35:20 by fcasaubo          #+#    #+#             */
-/*   Updated: 2024/04/13 14:05:29 by mikus            ###   ########.fr       */
+/*   Updated: 2024/04/13 15:55:36 by mikus            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
+#include "philosophers_bonus.h"
 
 void	*checker(void *philo)
 {
@@ -49,23 +49,28 @@ time_t	get_current_time(void)
 void	execute_simulation(t_philosopher **philo_list)
 {
 	unsigned int	i;
+	pid_t			pid;
 	t_philosopher	*philo;
-	pthread_t		watcher;
-
 	i = 0;
 	philo = *philo_list;
 	philo->args->simulation_start = get_current_time();
 	while (i++ < philo->args->philo_number)
 	{
-		pthread_create(&philo->thread, NULL, routine, philo);
+		pid = fork();
+		if (!pid)
+		{
+			philo->pid = pid;
+			routine(philo);
+			return (0);
+		}
 		philo = philo->next;
 	}
-	pthread_create(&watcher, NULL, checker, philo);
+	waitpid(-1, NULL, 0);
 	i = 0;
 	while (i++ < philo->args->philo_number)
 	{
-		pthread_join(philo->thread, NULL);
+		kill(philo->pid, SIGTERM);
 		philo = philo->next;
 	}
-	pthread_detach(watcher);
+	free_things(philo->args, philo);
 }
